@@ -1,5 +1,3 @@
-
-
 import Router from './routes';
 import { GlobalStyles } from './styles/global';
 

@@ -1,9 +1,7 @@
-/* eslint-disable no-console */
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IDefaultProviderProps, ILoginFormValue, IRegisterFormValue, IUser, IUserContext } from "./@types";
 import { api } from "../services/api";
-
 
 
 export const UserContext = createContext({} as IUserContext)
@@ -35,15 +33,11 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     userAutoLogin();
   }, []);
 
-
-
-
   const userLogin = async (dataLogin: ILoginFormValue) => {
     try {
       const response = await api.post("/login", dataLogin);
       setUser(response.data.user);
       localStorage.setItem("@TOKEN", response.data.accessToken);
-      console.log(response.data.message);
       navigate("/shop")
     } catch (error) {
       console.log(error)
@@ -64,15 +58,10 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     navigate("/")
   }
 
-
-
   return (
     <UserContext.Provider value={{ user, setUser, registerUser, userLogin, userLogout }}>
       {children}
     </UserContext.Provider>
   )
 }
-
-
-
 
